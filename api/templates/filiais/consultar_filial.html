@@ -1,0 +1,77 @@
+{% extends 'basedetalhes.html' %}
+{% block conteudo %}
+
+<!-- Arquivo views Consultar_Cliente_HTML, apresenta a função buscar_cliente para consultas de cliente.html listar
+# @author Fabiano Faria -->
+<div class="card border-0 shadow-sm" style="width:98%; margin-left:12px; margin-rigth:2px; margin-top:12px;">
+    <div class="card-header bg-secondary border-0 d-flex justify-content-between align-items-center">
+        <div class="card-header justify-content-between">
+		    <a href="{{ url_for('index') }}" title="Sobre a LAB página inicial">
+                <img src="https://i.postimg.cc/k54vbtBF/userlmn-ebfdb7b90b9b59a3c0ece37c1d46cf20-removebg-preview.png" alt="logo labct" height="50" width="115"/>
+            </a>
+            <span class="badge rounded text-bg-secondary">FILIAIS Vinculadas / Total: {{total_filiais}}</span>
+            <i class="fa-solid fa-circle text-success"></i><span class="badge rounded text-bg-success ">{{total_filiais_ativos}} ativo</span>
+            <i class="fa-solid fa-circle text-danger"></i><span class="badge rounded text-bg-danger">{{total_filiais_inativos}} inativo </span>
+        </div>
+         <a href="{{ url_for('listar_filiais') }}" class="btn btn-outline-dark" title="Voltar a lista">Voltar para lista de Filiais</a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive" style="width:100%">
+            <table class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Nome</th>
+                        <th>Endereço</th>
+                        <th>Bairro</th>
+                        <th>Cidade</th>
+                        <th>Estado</th>
+                        <th>Cliente/Fábrica</th>
+                        <th>Receitas</th>
+                        <th>Pedido_Compra</th>
+                        <th>Pedido_Produção</th>
+                        <th>Responsavel</th>
+                        <th>Whatsapp</th>
+                        <th>Cnpj</th>
+                        <th>Status</th>
+                        <th>Cadastrado_em</th>
+                        <th>Atualizado_em</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if resultados %}
+                        {% for filial in resultados %}
+                        <tr>
+                           <td>{{filial.id}}</td>
+                            <td>{{filial.nome}}</td>
+                            <td>{{filial.endereco}}</td>
+                            <td>{{filial.bairro}}</td>
+                            <td>{{filial.cidade}}</td>
+                            <td>{{filial.estado}}</td>
+                            <td>{{filial.clientes}}</td>
+                            <td>{{filial.receitas}}</td>
+                            <td>{{filial.pedidos}}</td>
+                            <td>{{filial.pedidosprod}}</td>
+                            <td>{{filial.responsavel}}</td>
+                            <td>{{filial.whatsapp}}</td>
+                            <td>{{filial.cnpj}}</td>
+                            <td>{{filial.status}}</td>
+                            <td>{{filial.cadastrado_em}}</td>
+                            <td>{{filial.atualizado_em}}</td>
+                            <td>
+                                <a href="{{ url_for('visualizar_filial', id=filial.id, _method='GET') }}" class="btn btn-info"  title="Detalhes Filial" role="button">Detalhes</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="10">Nenhum resultado encontrado.</td>
+                        </tr>
+                        {% endif %}
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+
+{% endblock conteudo %}
